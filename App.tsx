@@ -6,21 +6,21 @@
  */
 
 import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { createStaticNavigation } from '@react-navigation/native';
+
+import RootStack  from './Route'
 
 // createBottomTabNavigator({
 //   Home: { screen: HomePages },
 // })
 
-
+const Navigation = createStaticNavigation(RootStack);
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text>最新的安卓应用</Text>
-    </View>
+    <Navigation/>
   );
 }
 

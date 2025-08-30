@@ -5,10 +5,11 @@
  * @format
  */
 
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import { createStaticNavigation } from '@react-navigation/native';
+import { StyleSheet, useColorScheme } from 'react-native';
 
-import RootStack  from './Route'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootStack from './Route';
 
 // createBottomTabNavigator({
 //   Home: { screen: HomePages },
@@ -20,7 +21,9 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <Navigation/>
+    <SafeAreaProvider>
+      <Navigation />
+    </SafeAreaProvider>
   );
 }
 

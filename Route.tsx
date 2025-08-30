@@ -1,8 +1,55 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Ionicons from '@react-native-vector-icons/ionicons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomePages from './src/pages/home';
+import ProfileScreen from './src/pages/home/components/ProfileScreen';
 import HomeDetails from './src/pages/home/Detail';
-import { Button } from '@react-navigation/elements';
+
+const IconMap: any = {
+  Home: {
+    active: <Ionicons name="home" size={24} color={'#1677FF'} />,
+    inActive: <Ionicons name="home-outline" size={24} color={'#000'} />,
+  },
+  Profile: {
+    active: <Ionicons name="person-circle" size={24} color={'#1677FF'} />,
+    inActive: (
+      <Ionicons name="person-circle-outline" size={24} color={'#000'} />
+    ),
+  },
+};
+
+const HomeTabs = createBottomTabNavigator({
+  screens: {
+    Home: {
+      screen: HomePages,
+      options: () => {
+        return {
+          headerShown: false,
+        };
+      },
+    },
+    Profile: {
+      screen: ProfileScreen,
+      options: () => {
+        return {
+          headerShown: false,
+        };
+      },
+    },
+  },
+  screenOptions: ({ route, navigation, theme }) => {
+    return {
+      tabBarIcon: ({ focused, color, size }) => {
+        return focused
+          ? IconMap[route.name].active
+          : IconMap[route.name].inActive;
+      },
+      tabBarActiveTintColor: '#1677FF',
+      tabBarInactiveTintColor: 'gray',
+    };
+  },
+});
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -11,20 +58,9 @@ const RootStack = createNativeStackNavigator({
   },
   screens: {
     Home: {
-      screen: HomePages,
+      screen: HomeTabs,
       options: {
-        title: 'Overview',
-        headerRight: () => {
-          return (
-            <Button
-              onPress={() => {
-                alert('This is a info button!');
-              }}
-            >
-              info
-            </Button>
-          );
-        },
+        headerShown: false,
       },
     },
     Detail: HomeDetails,

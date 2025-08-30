@@ -13,6 +13,7 @@ export default function Container({ children }: ContainerProps) {
   return (
     <View
       style={{
+        flex: 1,
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,

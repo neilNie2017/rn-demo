@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Container from '../../layout/Container';
 
-const ProfileScreen = ({  }) => {
-
+const ProfileScreen = ({}) => {
   return (
-    <View>
+    <Container>
       <Text style={styles.text}>ProfileScreen</Text>
-  
-     
-    </View>
+    </Container>
   );
 };
 

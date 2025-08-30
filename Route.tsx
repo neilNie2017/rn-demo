@@ -3,13 +3,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomePages from './src/pages/home';
-import ProfileScreen from './src/pages/home/components/ProfileScreen';
+import ProfileScreen from './src/pages/profile';
 import HomeDetails from './src/pages/home/Detail';
+import TodoPages from './src/pages/todo';
 
 const IconMap: any = {
   Home: {
     active: <Ionicons name="home" size={24} color={'#1677FF'} />,
     inActive: <Ionicons name="home-outline" size={24} color={'#000'} />,
+  },
+  Todo: {
+    active: (
+      <Ionicons name="notifications-circle" size={24} color={'#1677FF'} />
+    ),
+    inActive: (
+      <Ionicons name="notifications-circle-outline" size={24} color={'#000'} />
+    ),
   },
   Profile: {
     active: <Ionicons name="person-circle" size={24} color={'#1677FF'} />,
@@ -23,6 +32,14 @@ const HomeTabs = createBottomTabNavigator({
   screens: {
     Home: {
       screen: HomePages,
+      options: () => {
+        return {
+          headerShown: false,
+        };
+      },
+    },
+    Todo: {
+      screen: TodoPages,
       options: () => {
         return {
           headerShown: false,
@@ -47,6 +64,7 @@ const HomeTabs = createBottomTabNavigator({
       },
       tabBarActiveTintColor: '#1677FF',
       tabBarInactiveTintColor: 'gray',
+      lazy: true,
     };
   },
 });

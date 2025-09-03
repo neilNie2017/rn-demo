@@ -6,6 +6,7 @@ import HomePages from './src/pages/home';
 import ProfileScreen from './src/pages/profile';
 import HomeDetails from './src/pages/home/Detail';
 import TodoPages from './src/pages/todo';
+import Container from './src/layout/Container';
 
 const IconMap: any = {
   Home: {
@@ -73,6 +74,9 @@ const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screenOptions: {
     headerStyle: { backgroundColor: 'tomato' },
+  },
+  screenLayout: props => {
+    return <Container >{props.children}</Container>;
   },
   screens: {
     Home: {

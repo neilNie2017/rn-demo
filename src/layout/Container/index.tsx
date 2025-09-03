@@ -9,7 +9,6 @@ interface ContainerProps {
 
 export default function Container({ children }: ContainerProps) {
   const insets = useSafeAreaInsets();
-
   return (
     <View
       style={{

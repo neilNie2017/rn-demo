@@ -5,6 +5,12 @@ import { Card, Text } from '@rneui/base';
 import { SearchBar } from '@rneui/themed';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import {
+  Camera,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
+} from 'react-native-vision-camera';
 type RootStackParamList = {
   Detail: {
     form: string;
@@ -15,6 +21,18 @@ const HomePages = () => {
   const title = 'MomOS工业操作系统';
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const { hasPermission, requestPermission } = useCameraPermission();
+  const device = useCameraDevice('back');
+  console.log('获取权限', device, hasPermission, requestPermission);
+
+  const codeScanner = useCodeScanner({
+    codeTypes: ['qr', 'ean-13'],
+    onCodeScanned: codes => {
+      console.log('扫码出来的内容==>', codes);
+    },
+  });
+
   return (
     <View>
       <Text
@@ -35,8 +53,16 @@ const HomePages = () => {
         inputContainerStyle={{}}
         lightTheme={true}
       />
+      {device && hasPermission && (
+        <Camera
+          device={device}
+          isActive
+          style={styles.absoluteFill}
+          codeScanner={codeScanner}
+        />
+      )}
       <Card containerStyle={{ marginTop: 15 }}>
-        <Card.Title>FONTS</Card.Title>
+        <Card.Title>FONTS1</Card.Title>
         <Card.Divider />
         <Text style={styles.fonts} h1>
           h1 Heading
@@ -68,6 +94,10 @@ const HomePages = () => {
 
 const styles = StyleSheet.create({
   fonts: {},
+  absoluteFill: {
+    width: 80,
+    height: 80,
+  },
 });
 
 export default HomePages;

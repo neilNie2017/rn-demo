@@ -7,6 +7,7 @@ import ProfileScreen from './src/pages/profile';
 import HomeDetails from './src/pages/home/Detail';
 import TodoPages from './src/pages/todo';
 import Container from './src/layout/Container';
+import LoginScreen from './src/pages/login';
 
 const IconMap: any = {
   Home: {
@@ -71,12 +72,12 @@ const HomeTabs = createBottomTabNavigator({
 });
 
 const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
+  initialRouteName: 'Login',
   screenOptions: {
     headerStyle: { backgroundColor: 'tomato' },
   },
   screenLayout: props => {
-    return <Container >{props.children}</Container>;
+    return <Container>{props.children}</Container>;
   },
   screens: {
     Home: {
@@ -86,6 +87,14 @@ const RootStack = createNativeStackNavigator({
       },
     },
     Detail: HomeDetails,
+    Login: {
+      screen: LoginScreen,
+      options: () => {
+        return {
+          headerShown: false,
+        };
+      },
+    },
   },
 });
 

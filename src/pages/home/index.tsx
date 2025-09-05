@@ -11,6 +11,7 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
+import SearchScanBar from '../../components/SearchBar';
 type RootStackParamList = {
   Detail: {
     form: string;
@@ -22,17 +23,6 @@ const HomePages = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const { hasPermission, requestPermission } = useCameraPermission();
-  const device = useCameraDevice('back');
-  console.log('获取权限', device, hasPermission, requestPermission);
-
-  const codeScanner = useCodeScanner({
-    codeTypes: ['qr', 'ean-13'],
-    onCodeScanned: codes => {
-      console.log('扫码出来的内容==>', codes);
-    },
-  });
-
   return (
     <View>
       <Text
@@ -43,24 +33,15 @@ const HomePages = () => {
       >
         {title}
       </Text>
-      <SearchBar
-        round
-        placeholder="搜索关键字"
-        searchIcon={<Ionicons name="search" size={24} />}
-        containerStyle={{
-          backgroundColor: 'none',
-        }}
-        inputContainerStyle={{}}
-        lightTheme={true}
-      />
-      {device && hasPermission && (
+      <SearchScanBar />
+      {/* {device && hasPermission && (
         <Camera
           device={device}
           isActive
           style={styles.absoluteFill}
           codeScanner={codeScanner}
         />
-      )}
+      )} */}
       <Card containerStyle={{ marginTop: 15 }}>
         <Card.Title>FONTS1</Card.Title>
         <Card.Divider />

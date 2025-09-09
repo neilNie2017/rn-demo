@@ -14,14 +14,19 @@ import {
   StatusBar,
 } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const navigation = useNavigation<any>();
 
-  const handleLogin = async () => {};
+  const handleLogin = async () => {
+    console.log('provider', navigation);
+    navigation.navigate('Home');
+  };
 
   const handleSocialLogin = provider => {
     Alert.alert('提示', `${provider}登录功能尚未实现`);

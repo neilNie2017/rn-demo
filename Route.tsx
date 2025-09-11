@@ -1,4 +1,7 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -71,6 +74,24 @@ const HomeTabs = createBottomTabNavigator({
   },
 });
 
+const screens = {
+  Home: {
+    screen: HomeTabs,
+    options: {
+      headerShown: false,
+    },
+  },
+  Detail: HomeDetails,
+  Login: {
+    screen: LoginScreen,
+    options: () => {
+      return {
+        headerShown: false,
+      };
+    },
+  },
+} as const;
+
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Login',
   screenOptions: {
@@ -79,23 +100,12 @@ const RootStack = createNativeStackNavigator({
   screenLayout: props => {
     return <Container>{props.children}</Container>;
   },
-  screens: {
-    Home: {
-      screen: HomeTabs,
-      options: {
-        headerShown: false,
-      },
-    },
-    Detail: HomeDetails,
-    Login: {
-      screen: LoginScreen,
-      options: () => {
-        return {
-          headerShown: false,
-        };
-      },
-    },
-  },
+  screens,
 });
+
+type ScreensKeys = keyof typeof screens;
+type ScreenObject = { [K in ScreensKeys]: any };
+
+export type NativeStackNa = NativeStackNavigationProp<ScreenObject>;
 
 export default RootStack;

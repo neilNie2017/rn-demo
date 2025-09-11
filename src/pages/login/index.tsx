@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { users } from '@mock/users';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -27,6 +28,7 @@ const LoginScreen = () => {
     console.log('provider', navigation);
     navigation.navigate('Home');
   };
+  console.log({ users }, '用户');
 
   const handleSocialLogin = provider => {
     Alert.alert('提示', `${provider}登录功能尚未实现`);
@@ -45,7 +47,7 @@ const LoginScreen = () => {
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.appName}>MomOS操作系统</Text>
+          <Text style={styles.appName}>RN DEMO</Text>
           <Text style={styles.welcomeText}>欢迎回来，请登录您的账户</Text>
         </View>
 

@@ -16,6 +16,7 @@ import {
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { users } from '@mock/users';
+import alovaInstace from '../../request';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -26,6 +27,12 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     console.log('provider', navigation);
+    const response = await alovaInstace
+      .Get('http://localhost:30000/users')
+      .catch(reason => {
+        console.log(reason, 'response');
+      });
+    console.log(response, ':========>response');
     navigation.navigate('Home');
   };
   console.log({ users }, '用户');

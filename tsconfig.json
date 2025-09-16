@@ -1,9 +1,9 @@
 {
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@mock/*": ["./mock/*"]
+      "@mock/*": ["./src/mock/*"]
     }
   }
 }
